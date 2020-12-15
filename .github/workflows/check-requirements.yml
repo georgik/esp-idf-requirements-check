@@ -6,10 +6,15 @@ jobs:
   check-requirements:
     name: Check Python requirements
     runs-on: windows-latest
-    container: python:3.7.9-windowsservercore
+    # Windows Containers are not supported by GitHub Actions
+    # It's necessary to install Python manually
+    #container: python:3.7.9-windowsservercore
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Install Python
+        run: .\Install-Python.ps1 -PythonVersion "3.8.6" -PythonDir "python3"
+        shell: pwsh
       - name: Run Bundle script
-        run: pip install -r requirements.txt
+        run: .\python3\python.exe -m pip install -r .\requirements.txt
