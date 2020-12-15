@@ -10,6 +10,7 @@ Check whether ESP-IDF requirements are installable with defined version of Pytho
 
 * ESP-IDF main - Python 3.9.1 - ![check-requirements](https://github.com/georgik/esp-idf-requirements-check/workflows/check-requirements/badge.svg?branch=main_py3.9)
 * ESP-IDF main - Python 3.8.6 - ![check-requirements](https://github.com/georgik/esp-idf-requirements-check/workflows/check-requirements/badge.svg?branch=main_py3.8)
+* ESP-IDF main - Python 3.7.9 - ![check-requirements](https://github.com/georgik/esp-idf-requirements-check/workflows/check-requirements/badge.svg?branch=main_py3.7)
 
 # Release v4.1
 
