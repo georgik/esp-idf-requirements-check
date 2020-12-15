@@ -1,0 +1,15 @@
+name: check-requirements
+
+on: push
+
+jobs:
+  check-requirements:
+    name: Check Python requirements
+    runs-on: windows-latest
+    container: python:3.7.9-windowsservercore
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Run Bundle script
+        run: pip install -r requirements.txt
