@@ -5,5 +5,5 @@ Status: ![check-requirements](https://github.com/georgik/esp-idf-requirements-ch
 
 Environment:
 * Windows 64bit
-* Python 3.8.6
+* Python 3.9.1
 * ESP-IDF: 2020-12-15 - main
