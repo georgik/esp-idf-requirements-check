@@ -19,7 +19,7 @@ jobs:
       - name: Download requirements
         run: pip download --only-binary ":all:" --no-binary future -r .\requirements.txt
       - name: Run Bundle script
-        run: .\python3\python.exe -m pip install --no-index --find-links download -r .\requirements.txt
+        run: python -m pip install --no-index --find-links download -r .\requirements.txt
       - name: Archive artifact
         uses: actions/upload-artifact@v2
         with:
