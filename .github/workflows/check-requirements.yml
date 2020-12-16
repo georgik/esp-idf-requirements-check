@@ -17,7 +17,7 @@ jobs:
         run: mkdir download
         shell: pwsh
       - name: Download requirements
-        run: pip download --only-binary ":all:" --no-binary future -r .\requirements.txt
+        run: pip download --only-binary ":all:" --no-binary future -r --dest download .\requirements.txt
       - name: Run Bundle script
         run: python -m pip install --no-index --find-links download -r .\requirements.txt
       - name: Archive artifact
