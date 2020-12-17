@@ -9,10 +9,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Set up Python 3.8
+      - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.8'
+          python-version: '3.7'
       - name: Prepare download folder
         run: mkdir download
         shell: pwsh
@@ -23,5 +23,5 @@ jobs:
       - name: Archive artifact
         uses: actions/upload-artifact@v2
         with:
-          name: idf4.2_py3.8_wheels
+          name: idf4.2_py3.7_wheels
           path: download/
