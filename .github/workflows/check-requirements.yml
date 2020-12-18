@@ -26,7 +26,7 @@ jobs:
       - name: Build wheel for cryptography
         run: python -m pip wheel cryptography; $cache=pip cache dir; Get-ChildItem -Path $cache 'cryptography*.whl' -Recurse | % {Copy-Item -Path $_.FullName -Destination download -Container };
       - name: Build wheel for gevent
-        run: python -m pip wheel gevent; $cache=pip cache dir; Get-ChildItem -Path $cache 'gevent*.whl' -Recurse | % {Copy-Item -Path $_.FullName -Destination download -Container }; ls download
+        run: python -m pip wheel "gevent<2.0,>=1.2.2"; $cache=pip cache dir; Get-ChildItem -Path $cache 'gevent*.whl' -Recurse | % {Copy-Item -Path $_.FullName -Destination download -Container }; ls download
       - name: Download requirements
         run: pip download --only-binary gevent --only-binary cryptography --find-links download --dest download -r .\requirements.txt
       - name: Install requirements
