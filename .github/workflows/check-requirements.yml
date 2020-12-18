@@ -16,6 +16,8 @@ jobs:
       - name: Prepare download folder
         run: mkdir download
         shell: pwsh
+      - name: List env variables
+        run: dir "env:"
       - name: Install build dependencies
         run: pip install wheel
       - name: Build wheel for greenlet
