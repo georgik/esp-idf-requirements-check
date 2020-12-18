@@ -18,13 +18,13 @@ jobs:
         shell: pwsh
       - name: Install build dependencies
         run: pip install wheel
-      - name: Build wheel for reedsolo
-        run: python -m pip wheel reedsolo; $cache=pip cache dir; Get-ChildItem -Path $cache 'reedsolo*.whl' -Recurse | % {Copy-Item -Path $_.FullName -Destination download -Container };
-      - name: Build wheel for greenlet
+      #- name: Build wheel for reedsolo
+      #  run: python -m pip wheel reedsolo; $cache=pip cache dir; Get-ChildItem -Path $cache 'reedsolo*.whl' -Recurse | % {Copy-Item -Path $_.FullName -Destination download -Container };
+      #- name: Build wheel for greenlet
         # PowerShell search for wheel, because --wheel-dir does not work on GitHub runners
-        run: python -m pip wheel greenlet; $cache=pip cache dir; Get-ChildItem -Path $cache 'greenlet*.whl' -Recurse | % {Copy-Item -Path $_.FullName -Destination download -Container };
-      - name: Build wheel for cryptography
-        run: python -m pip wheel cryptography; $cache=pip cache dir; Get-ChildItem -Path $cache 'cryptography*.whl' -Recurse | % {Copy-Item -Path $_.FullName -Destination download -Container };
+      #  run: python -m pip wheel greenlet; $cache=pip cache dir; Get-ChildItem -Path $cache 'greenlet*.whl' -Recurse | % {Copy-Item -Path $_.FullName -Destination download -Container };
+      #- name: Build wheel for cryptography
+      #  run: python -m pip wheel cryptography; $cache=pip cache dir; Get-ChildItem -Path $cache 'cryptography*.whl' -Recurse | % {Copy-Item -Path $_.FullName -Destination download -Container };
       - name: Build wheel for gevent
         run: python -m pip wheel "gevent<2.0,>=1.2.2"; $cache=pip cache dir; Get-ChildItem -Path $cache 'gevent*.whl' -Recurse | % {Copy-Item -Path $_.FullName -Destination download -Container }; ls download
       - name: Download requirements
