@@ -20,9 +20,9 @@ jobs:
         run: pip install wheel
       - name: Build wheel for greenlet
         # PowerShell search for wheel, because --wheel-dir does not work on GitHub runners
-        run: python -m pip wheel greenlet; $cache=pip cache dir; Get-ChildItem -Path $cache 'greenlet*.whl' -Recurse | % {Copy-Item -Path $_.FullName -Destination download -Container }
+        run: python -m pip wheel greenlet; $cache=pip cache dir; Get-ChildItem -Path $cache 'greenlet*.whl' -Recurse | % {Copy-Item -Path $_.FullName -Destination download -Container }; ls download
       - name: Download requirements
-        run: pip download --dest download -r .\requirements.txt
+        run: pip download --only-binary greenlet --dest download -r .\requirements.txt
       - name: Install requirements
         run: python -m pip install --no-index --find-links download -r .\requirements.txt
       - name: Write version of package to file
