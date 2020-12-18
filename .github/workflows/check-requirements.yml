@@ -19,7 +19,7 @@ jobs:
       - name: Install build dependencies
         run: pip install wheel
       - name: Build wheel for greenlet
-        run: $env:PIP_DOWNLOAD_CACHE="download"; python -m pip wheel --wheel-dir download greenlet
+        run: $env:USER_CACHE_DIR="download"; python -m pip wheel --wheel-dir download greenlet
       - name: Download requirements
         run: pip download --only-binary greenlet --dest download -r .\requirements.txt
       - name: Install requirements
