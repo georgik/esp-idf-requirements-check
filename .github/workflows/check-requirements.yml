@@ -22,8 +22,10 @@ jobs:
         shell: pwsh
       - name: Install build dependencies
         run: pip install wheel
+      - name: Build wheel for greenlet
+        run: python -m pip wheel --find-links download greenlet; $cache=pip cache dir; Get-ChildItem -Path $cache 'greenlet*.whl' -Recurse | % {Copy-Item -Path $_.FullName -Destination download -Container };
       - name: Build wheel for gevent
-        run: python -m pip wheel --find-links download --only-binary greenlet --only-binary brotli "gevent<2.0,>=1.2.2"; $cache=pip cache dir; Get-ChildItem -Path $cache 'gevent*.whl' -Recurse | % {Copy-Item -Path $_.FullName -Destination download -Container }; ls download
+        run: python -m pip wheel --find-links download --only-binary greenlet "gevent<2.0,>=1.2.2"; $cache=pip cache dir; Get-ChildItem -Path $cache 'gevent*.whl' -Recurse | % {Copy-Item -Path $_.FullName -Destination download -Container }; ls download
       - name: Download requirements
         run: pip download --only-binary greenlet --only-binary gevent --only-binary cryptography --find-links download --dest download -r .\requirements.txt
       - name: Install requirements
