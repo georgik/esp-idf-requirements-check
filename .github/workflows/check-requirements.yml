@@ -19,10 +19,18 @@ jobs:
         shell: pwsh
       - name: Install build dependencies
         run: pip install wheel
+      - name: Build wheels for IDF master
+        run: .\Build-Wheels.ps1  -Branch "master" -CompileWheels @("greenlet", "gevent<2.0,>=1.2.2", "cryptography", "windows-curses")
+      - name: Test wheels by installation
+        run: .\Test-Wheels.ps1 -Branch "master"
       - name: Build wheels for IDF release/v4.2
         run: .\Build-Wheels.ps1  -Branch "release/v4.2" -CompileWheels @("greenlet", "gevent<2.0,>=1.2.2", "cryptography", "windows-curses")
       - name: Test wheels by installation
         run: .\Test-Wheels.ps1 -Branch "release/v4.2"
+      - name: Build wheels for IDF release/v4.1
+        run: .\Build-Wheels.ps1  -Branch "release/v4.1" -CompileWheels @("windows-curses")
+      - name: Test wheels by installation
+        run: .\Test-Wheels.ps1 -Branch "release/v4.1"
       - name: Write version of package to file
         run: python -c  "print('idf4.2_py3.9', file=open('download/version.txt', 'w'))"
       - name: Archive artifact
