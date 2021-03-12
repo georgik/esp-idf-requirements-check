@@ -26,10 +26,10 @@ jobs:
           ref: v4.2
           repository: espressif/esp-idf
           submodules: true
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.8'
+      #- name: Set up Python
+      #  uses: actions/setup-python@v2
+      #  with:
+      #    python-version: '3.8'
       - name: Install Python virtualenv
         run: python esp-idf/tools/idf_tools.py install-python-env
         shell: pwsh
