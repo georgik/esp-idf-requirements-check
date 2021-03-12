@@ -29,8 +29,11 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.8'
+      - name: Install Python virtualenv
+        run: python esp-idf/tools/idf_tools.py install-python-env
+        shell: pwsh
       - name: Download dependencies
-        run: cd esp-idf; ./install.ps1
+        run: python esp-idf/tools/idf_tools.py install --non-interactive
         shell: pwsh
       - name: Build the project
         run: cd ${{ github.workspace }}/project ; . $env:IDF_PATH/export.ps1; idf.py build
