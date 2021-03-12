@@ -30,7 +30,7 @@ jobs:
         with:
           python-version: '3.8'
       - name: Download dependencies
-        run: cd esp-idf; install.bat
+        run: cd esp-idf; ./install.ps1
         shell: pwsh
       - name: Build the project
         run: cd ${{ github.workspace }}/project ; . $env:IDF_PATH/export.ps1; idf.py build
