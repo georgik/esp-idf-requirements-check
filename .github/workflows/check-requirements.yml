@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           path: esp-idf
-          ref: v4.1.1
+          ref: v4.2
           repository: espressif/esp-idf
           submodules: true
       - name: Set up Python
