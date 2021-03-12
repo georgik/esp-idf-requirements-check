@@ -8,7 +8,8 @@ on:
 jobs:
   check-requirements:
     name: Check build requirements
-    runs-on: windows-latest
+    #runs-on: windows-latest
+    runs-on: self-hosted
     env:
       IDF_PATH: ${{ github.workspace }}/esp-idf
     steps:
