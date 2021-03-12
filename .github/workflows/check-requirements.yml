@@ -10,7 +10,7 @@ jobs:
     name: Check build requirements
     runs-on: windows-latest
     env:
-      IDF_PATH=${{ github.workspace }}/esp-idf
+      IDF_PATH: ${{ github.workspace }}/esp-idf
     steps:
       - name: Checkout project repository
         uses: actions/checkout@v2
