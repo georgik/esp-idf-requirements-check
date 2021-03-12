@@ -3,21 +3,35 @@ name: check-requirements
 on:
   push:
     tags:
-    - test-*
+    - build-*
 
 jobs:
   check-requirements:
     name: Check build requirements
     runs-on: windows-latest
+    env:
+      IDF_PATH=${GITHUB_WORKSPACE}/esp-idf
     steps:
-      - name: Checkout repository
+      - name: Checkout project repository
         uses: actions/checkout@v2
+        with:
+          path: project
+          repository: ctag-fh-kiel/ctag-tbd
+          submodules: true
+      - name: Checkout ESP-IDF repository
+        uses: actions/checkout@v2
+        with:
+          path: esp-idf
+          ref: v4.1.1
+          repository: espressif/esp-idf
+          submodules: true
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: '3.8'
-      - name: Prepare download folder
-        run: mkdir download
+      - name: Download dependencies
+        run: cd esp-idf; install.bat
         shell: pwsh
-      - name: Download requirements
-        run: pip download --only-binary ":all:" --no-binary future --dest download -r .\requirements.txt
+      - name: Build the project
+        run: cd $GITHUB_WORKSPACE/project ; . $env:IDF_PATH/export.ps1; idf.py build
+        shell: pwsh
