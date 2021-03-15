@@ -22,6 +22,7 @@ $LogWatcher = Start-Job { Get-Countent ./out.txt -Wait }
 # Wait for installer to finish
 while (!$InstallerProcess.HasExited) {
     Sleep 5
+    Receive-Job $LogWatcher
 }
 Wait-Process -Id $InstallerProcess.id
 Stop-Job $LogWatcher
