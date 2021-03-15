@@ -29,5 +29,5 @@ while (!$InstallerProcess.HasExited) {
     Sleep 5
     Receive-Job $LogWatcher -Keep
 }
-Wait-Process -Id $InstallerProcess.id
+
 Stop-Job $LogWatcher
