@@ -17,7 +17,7 @@ jobs:
         run:  Invoke-WebRequest https://github.com/espressif/idf-installer/releases/download/online-2.6-beta-32/esp-idf-tools-setup-online-2.6-beta-32.exe -OutFile installer.exe
         shell: pwsh
       - name: Run installer
-        run: ./Install-Idf.ps1 -IdfVersion=v4.2
+        run: ./Install-Idf.ps1 -IdfVersion 'v4.2'
         shell: pwsh
       #- name: Build the project
       #  run: cd ${{ github.workspace }}/project ; . $env:IDF_PATH/export.ps1; $env:IDF_CCACHE_ENABLE=''; git submodule update --init --recursive; idf.py fullclean; idf.py build
