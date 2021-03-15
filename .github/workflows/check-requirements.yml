@@ -11,9 +11,6 @@ jobs:
     runs-on: windows-latest
     #runs-on: self-hosted
     steps:
-      - name: Install Python virtualenv
-        run: python esp-idf/tools/idf_tools.py install-python-env
-        shell: pwsh
       - name: Download Installer
         run:  Invoke-WebRequest https://github.com/espressif/idf-installer/releases/download/online-2.6-beta-32/esp-idf-tools-setup-online-2.6-beta-32.exe -OutFile installer.exe
         shell: pwsh
