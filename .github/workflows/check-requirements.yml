@@ -13,12 +13,6 @@ jobs:
     env:
       IDF_PATH: ${{ github.workspace }}/esp-idf
     steps:
-      - name: Checkout project repository
-        uses: actions/checkout@v2
-        with:
-          path: project
-          repository: ctag-fh-kiel/ctag-tbd
-          submodules: true
       - name: Checkout ESP-IDF repository
         uses: actions/checkout@v2
         with:
@@ -37,5 +31,5 @@ jobs:
         run: python esp-idf/tools/idf_tools.py --non-interactive install
         shell: pwsh
       - name: Build the project
-        run: cd ${{ github.workspace }}/project ; . $env:IDF_PATH/export.ps1; idf.py build
+        run: cd ${{ github.workspace }}/esp-idf ; . $env:IDF_PATH/export.ps1; cd examples/get-started/blink; idf.py fullclean; idf.py build
         shell: pwsh
