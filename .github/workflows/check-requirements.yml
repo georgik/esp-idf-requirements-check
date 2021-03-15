@@ -12,7 +12,7 @@ jobs:
     runs-on: self-hosted
     env:
       IDF_PATH: ${{ github.workspace }}/esp-idf
-      IDF_CCACHE_ENABLE: ''
+      #IDF_CCACHE_ENABLE: '' # This does not work here, export.ps1 will override it
     steps:
       - name: Checkout project repository
         uses: actions/checkout@v2
@@ -39,5 +39,5 @@ jobs:
         shell: pwsh
       - name: Build the project
         # It's necessary to update submodule manually, otherwhise some submodule directories remains empty
-        run: cd ${{ github.workspace }}/project ; . $env:IDF_PATH/export.ps1; git submodule update --init --recursive; idf.py fullclean; idf.py build
+        run: cd ${{ github.workspace }}/project ; . $env:IDF_PATH/export.ps1; $env:IDF_CCACHE_ENABLE=''; git submodule update --init --recursive; idf.py fullclean; idf.py build
         shell: pwsh
