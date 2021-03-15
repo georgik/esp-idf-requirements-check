@@ -37,5 +37,6 @@ jobs:
         run: python esp-idf/tools/idf_tools.py --non-interactive install
         shell: pwsh
       - name: Build the project
-        run: cd ${{ github.workspace }}/project ; . $env:IDF_PATH/export.ps1; git submodule update --init --recursive; idf.py fullclean; idf.py build
+        # It's necessary to update submodule manually, otherwhise some submodule directories remains empty
+        run: cd ${{ github.workspace }}/esp-idf; git submodule update --init --recursive; cd ${{ github.workspace }}/project ; . $env:IDF_PATH/export.ps1; git submodule update --init --recursive; idf.py fullclean; idf.py build
         shell: pwsh
