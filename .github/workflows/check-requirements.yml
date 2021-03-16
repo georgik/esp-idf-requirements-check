@@ -20,5 +20,5 @@ jobs:
         run: ./Install-Idf.ps1 -IdfVersion 'v4.2'
         shell: pwsh
       - name: Build blink
-        run: ./Test-IdfCmd.ps1
+        run: ./Test-IdfCmd.ps1 -Components "ide/powershell,ide/cmd"
         shell: pwsh

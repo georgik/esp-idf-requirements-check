@@ -6,7 +6,7 @@ param (
     [String]
     $IdfVersion = "v4.2",
     [String]
-    $Components = "ide\powershell,ide\cmd"
+    $Components = "ide/powershell,ide/cmd"
 )
 
 "Configuration:"

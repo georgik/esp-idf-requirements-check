@@ -11,8 +11,17 @@ Set-Location "${IdfPath}"
 Start-Sleep -s 5
 
 $WSShell = New-Object -comObject WScript.Shell
-$Shortcut = $WSShell.CreateShortcut('C:/Users/runneradmin/Desktop/ESP-IDF 4.2 CMD.lnk')
+$LinkPath = 'C:/Users/runneradmin/Desktop/ESP-IDF 4.2 CMD.lnk'
+
+if (-Not(Test-Path $LinkPath -PathType Container)) {
+    "$LinkPath does not exist"
+    Exit 1
+}
+
+$Shortcut = $WSShell.CreateShortcut($LinkPath)
 $Arguments = $Shortcut.Arguments -replace "/k ", "/c '"
 $Command = $Shortcut.TargetPath + ' ' + $Arguments -replace '""', '"'
 $Command += " && cd examples\get-started\blink\ && idf.py build'"
+
+$Command
 Invoke-Expression -Command $Command
