@@ -14,14 +14,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Download Installer
-        run:  Invoke-WebRequest https://github.com/espressif/idf-installer/releases/download/online-2.6-beta-32/esp-idf-tools-setup-online-2.6-beta-32.exe -OutFile installer.exe
+        run:  Invoke-WebRequest https://github.com/espressif/idf-installer/releases/download/online-2.6-beta-36/esp-idf-tools-setup-online-2.6-beta-36.exe -OutFile installer.exe
         shell: pwsh
       - name: Run installer
         run: ./Install-Idf.ps1 -IdfVersion 'v4.2'
         shell: pwsh
-      - name: Build the project
-        run: cd C:/Users/runneradmin/Desktop/esp-idf ; . $env:IDF_PATH/export.ps1; $env:IDF_CCACHE_ENABLE=''; cd examples/get-started/blink; idf.py build
-        shell: pwsh
-      - name: Build blimk
+      - name: Build blink
         run: ./Test-IdfCmd.ps1
         shell: ps1

@@ -4,7 +4,9 @@ param (
     [String]
     $Installer="./installer.exe",
     [String]
-    $IdfVersion = "v4.2"
+    $IdfVersion = "v4.2",
+    [String]
+    $Components = "ide\powershell,ide\cmd"
 )
 
 "Configuration:"
@@ -15,7 +17,7 @@ $Directory = (Get-Location).Path
 $LogFile = Join-Path -Path $Directory -ChildPath out.txt
 $ProcessName = (Get-Item $Installer).Basename
 "Waiting for process: $ProcessName"
-&$Installer /VERYSILENT /LOG=$LogFile /SUPPRESSMSGBOXES /SP- /NOCANCEL /NORESTART /IDFVERSION=${IdfVersion}
+&$Installer /VERYSILENT /LOG=$LogFile /COMPONENTS=$Components /SUPPRESSMSGBOXES /SP- /NOCANCEL /NORESTART /IDFVERSION=${IdfVersion}
 $InstallerProcess = Get-Process $ProcessName
 Sleep 5
 # Logs must be watched in separate job, because Inno Setup does not allow to print stdout.
@@ -27,7 +29,7 @@ $LogWatcher = Start-Job -ArgumentList $LogFile -ScriptBlock {
 # Wait for installer to finish
 while (!$InstallerProcess.HasExited) {
     Sleep 5
-    Receive-Job $LogWatcher -Keep
+    Receive-Job $LogWatcher
 }
 
 Stop-Job $LogWatcher
