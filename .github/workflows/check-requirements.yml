@@ -17,7 +17,7 @@ jobs:
         run:  Invoke-WebRequest https://github.com/espressif/idf-installer/releases/download/online-2.6-beta-36/esp-idf-tools-setup-online-2.6-beta-36.exe -OutFile installer.exe
         shell: pwsh
       - name: Run installer
-        run: ./Install-Idf.ps1 -IdfVersion 'v4.2' -Components "ide/powershell,ide/cmd"
+        run: ./Install-Idf.ps1 -IdfVersion 'v4.2' -Components "ide/powershell/desktop,ide/cmd/desktop"
         shell: pwsh
       - name: Build blink
         run: ./Test-IdfCmd.ps1
