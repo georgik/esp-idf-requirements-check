@@ -21,4 +21,4 @@ jobs:
         shell: pwsh
       - name: Build blink
         run: ./Test-IdfCmd.ps1
-        shell: ps1
+        shell: pwsh

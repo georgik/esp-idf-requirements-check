@@ -28,7 +28,7 @@ $LogWatcher = Start-Job -ArgumentList $LogFile -ScriptBlock {
 
 # Wait for installer to finish
 while (!$InstallerProcess.HasExited) {
-    Sleep 5
+    Sleep 1
     Receive-Job $LogWatcher
 }
 
