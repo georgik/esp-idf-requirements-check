@@ -1,23 +1,33 @@
 name: check-requirements
 
 on:
-  push:
-    tags:
-    - build-*
+  workflow_dispatch:
+    inputs:
+      idf_version:
+        description: 'IDF Version'
+        required: true
+        default: 'v4.2'
+      installer_url:
+        description: 'Installer URL'
+        required: true
+        default: 'https://github.com/espressif/idf-installer/releases/download/online-2.6-beta-36/esp-idf-tools-setup-online-2.6-beta-36.exe'
+      components:
+        description: 'Comma separated list of installer components from IdfToolsSetup.iss'
+        required: true
+        default: ide/powershell/desktop,ide/cmd/desktop
 
 jobs:
   check-requirements:
     name: Check Online installer
     runs-on: windows-latest
-    #runs-on: self-hosted
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Download Installer
-        run:  Invoke-WebRequest https://github.com/espressif/idf-installer/releases/download/online-2.6-beta-36/esp-idf-tools-setup-online-2.6-beta-36.exe -OutFile installer.exe
+        run:  Invoke-WebRequest ${{ github.event.inputs.installer_url }} -OutFile installer.exe
         shell: pwsh
       - name: Run installer
-        run: ./Install-Idf.ps1 -IdfVersion 'v4.2' -Components "ide/powershell/desktop,ide/cmd/desktop"
+        run: ./Install-Idf.ps1 -IdfVersion "${{ github.event.inputs.idf_version }}" -Components "${{ github.event.inputs.components }}"
         shell: pwsh
       - name: Build blink
         run: ./Test-IdfCmd.ps1
