@@ -9,11 +9,11 @@ Set-Location "${IdfPath}"
 # Timeout is necessary to fix the problem when installer is writing some final files
 # it seems that installer exits, but locks were not released yet
 Start-Sleep -s 5
-
+ESP-IDF 4.2 CMD
 $WSShell = New-Object -comObject WScript.Shell
 $LinkPath = 'C:/Users/runneradmin/Desktop/ESP-IDF 4.2 CMD.lnk'
 
-if (-Not(Test-Path $LinkPath -PathType Container)) {
+if (-Not(Test-Path $LinkPath -PathType Leaf)) {
     "$LinkPath does not exist"
     Exit 1
 }
